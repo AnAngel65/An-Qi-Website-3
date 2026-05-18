@@ -79,22 +79,25 @@ const SiteEvolution = () => {
               <h2 className="text-2xl font-bold text-center mb-8">Site Evolution</h2>
               
               {/* Horizontal Timeline */}
-              <div className="relative">
-                {/* The horizontal line */}
-                <div className="absolute top-8 left-0 w-full h-0.5 bg-border transform -translate-y-1/2"></div>
+              <div className="relative px-4 md:px-0">
+                {/* The horizontal line for desktop */}
+                <div className="hidden md:block absolute top-8 left-0 w-full h-0.5 bg-border"></div>
                 
-                <div className="grid grid-cols-5 gap-4 items-stretch">
+                {/* The vertical line for mobile */}
+                <div className="block md:hidden absolute top-0 left-1/2 w-0.5 h-full bg-border transform -translate-x-1/2"></div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-4 items-start md:items-stretch">
                   {timelineData.map((item, index) => (
                     <div key={index} className="flex flex-col items-center relative z-10">
                       {/* Dot on the timeline */}
-                      <div className={`w-4 h-4 rounded-full ${item.active ? 'bg-primary ring-4 ring-primary/30' : 'bg-muted'}`}></div>
+                      <div className={`w-4 h-4 rounded-full ${item.active ? 'bg-primary ring-4 ring-primary/30' : 'bg-muted'} absolute md:relative top-0 left-1/2 md:left-auto transform -translate-x-1/2 md:transform-none`}></div>
                       
                       {/* Timeline Item Card */}
                       <a 
                         href={item.linkUrl} 
                         target={item.linkUrl.startsWith('http') ? '_blank' : '_self'} 
                         rel={item.linkUrl.startsWith('http') ? 'noopener noreferrer' : ''}
-                        className={`mt-4 p-4 rounded-lg border border-border bg-card text-center flex flex-col h-full w-full ${item.comingSoon || !item.linkUrl ? 'pointer-events-none' : 'cursor-pointer hover:bg-accent'}`}
+                        className={`mt-12 md:mt-4 p-4 rounded-lg border border-border bg-card text-center flex flex-col h-full w-full max-w-xs mx-auto ${item.comingSoon || !item.linkUrl ? 'pointer-events-none' : 'cursor-pointer hover:bg-accent'}`}
                       >
                         {/* Image Placeholder */}
                         <div className="w-full h-32 bg-muted/50 rounded-md mb-4 flex items-center justify-center flex-shrink-0 relative">
