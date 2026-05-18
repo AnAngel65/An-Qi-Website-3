@@ -1,0 +1,134 @@
+"use client";
+
+import { useState } from "react";
+import { X } from "lucide-react";
+import Image from "next/image";
+
+
+const timelineData = [
+  {
+    title: "The Origin",
+    description: "Manual design & visual layout.",
+    active: false,
+    comingSoon: false,
+    imageUrl: "/images/v1.png",
+    linkUrl: "/assets/documents/2026 CV.pdf",
+  },
+  {
+    title: "The Foundation",
+    description: "Transitioning from design to code.",
+    active: false,
+    comingSoon: false,
+    imageUrl: "/images/v2.png",
+    linkUrl: "https://an-qi-website.vercel.app/",
+  },
+  {
+    title: "The Exploration",
+    description: "Integrating AI for better UI design.",
+    active: false,
+    comingSoon: false,
+    imageUrl: "/images/v3.png",
+    linkUrl: "https://website-v2-pied-five.vercel.app/",
+  },
+  {
+    title: "The Evolution",
+    description: "Advanced high-fidelity UI refinement.",
+    active: true,
+    comingSoon: false,
+    imageUrl: "/images/v4.png",
+    linkUrl: "",
+  },
+  {
+    title: "The Dream",
+    description: "",
+    active: false,
+    comingSoon: true,
+    imageUrl: "",
+    linkUrl: "",
+  },
+];
+
+const SiteEvolution = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  return (
+    <>
+      {/* Floating Action Button */}
+      <button
+        onClick={() => setIsModalOpen(true)}
+        className="fixed bottom-8 right-8 bg-primary text-primary-foreground p-2 rounded-full shadow-lg hover:bg-primary/80 transition-colors duration-300 z-50"
+        aria-label="Open site evolution timeline"
+      >
+        <Image src="/images/pngtree-a-closer-look-at-the-hourglass-png-image_11517571.png" alt="Site Evolution" width={40} height={40} loading="eager" />
+      </button>
+
+      {/* Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-background/80 backdrop-blur-md flex items-center justify-center z-50 p-4">
+          <div className="bg-card border border-border rounded-lg shadow-xl w-full max-w-7xl text-card-foreground relative">
+            {/* Close Button */}
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors z-10"
+              aria-label="Close site evolution timeline"
+            >
+              <X size={24} />
+            </button>
+
+            <div className="p-8">
+              <h2 className="text-2xl font-bold text-center mb-8">Site Evolution</h2>
+              
+              {/* Horizontal Timeline */}
+              <div className="relative">
+                {/* The horizontal line */}
+                <div className="absolute top-8 left-0 w-full h-0.5 bg-border transform -translate-y-1/2"></div>
+                
+                <div className="grid grid-cols-5 gap-4 items-stretch">
+                  {timelineData.map((item, index) => (
+                    <div key={index} className="flex flex-col items-center relative z-10">
+                      {/* Dot on the timeline */}
+                      <div className={`w-4 h-4 rounded-full ${item.active ? 'bg-primary ring-4 ring-primary/30' : 'bg-muted'}`}></div>
+                      
+                      {/* Timeline Item Card */}
+                      <a 
+                        href={item.linkUrl} 
+                        target={item.linkUrl.startsWith('http') ? '_blank' : '_self'} 
+                        rel={item.linkUrl.startsWith('http') ? 'noopener noreferrer' : ''}
+                        className={`mt-4 p-4 rounded-lg border border-border bg-card text-center flex flex-col h-full w-full ${item.comingSoon || !item.linkUrl ? 'pointer-events-none' : 'cursor-pointer hover:bg-accent'}`}
+                      >
+                        {/* Image Placeholder */}
+                        <div className="w-full h-32 bg-muted/50 rounded-md mb-4 flex items-center justify-center flex-shrink-0 relative">
+                          {item.imageUrl ? (
+                            <Image src={item.imageUrl} alt={item.title} fill sizes="20vw" className="rounded-md object-cover" />
+                          ) : (
+                            <span className="text-muted-foreground text-sm">Image</span>
+                          )}
+                        </div>
+                        <div className="flex flex-col flex-grow justify-between">
+                          <div>
+                            <h3 className="font-bold text-lg">{item.title}</h3>
+                            <p className="text-xs mt-2 text-muted-foreground">{item.description}</p>
+                          </div>
+                          <div className="mt-4">
+                            {item.active && (
+                              <span className="inline-block px-2 py-0.5 text-xs bg-primary text-primary-foreground rounded-full">Active</span>
+                            )}
+                            {item.comingSoon && (
+                              <span className="inline-block px-2 py-0.5 text-xs bg-secondary text-secondary-foreground rounded-full shadow-[0_0_10px_var(--color-secondary)]">Coming Soon</span>
+                            )}
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default SiteEvolution;
