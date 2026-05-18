@@ -56,10 +56,10 @@ const SiteEvolution = () => {
       {/* Floating Action Button */}
       <button
         onClick={() => setIsModalOpen(true)}
-        className="fixed bottom-8 right-8 bg-primary text-primary-foreground p-2 rounded-full shadow-lg hover:bg-primary/80 transition-colors duration-300 z-50"
+        className="fixed bottom-8 right-8 bg-primary/20 text-primary-foreground p-2 rounded-full shadow-lg hover:bg-primary/60 transition-colors duration-300 z-50"
         aria-label="Open site evolution timeline"
       >
-        <Image src="/images/pngtree-a-closer-look-at-the-hourglass-png-image_11517571.png" alt="Site Evolution" width={40} height={40} loading="eager" />
+        <Image src="/images/pngtree-a-closer-look-at-the-hourglass-png-image_11517571.png" alt="Site Evolution" width={40} height={40} loading="eager" className="opacity-75 group-hover:opacity-100 transition-opacity" />
       </button>
 
       {/* Modal */}
@@ -97,7 +97,7 @@ const SiteEvolution = () => {
                         href={item.linkUrl} 
                         target={item.linkUrl.startsWith('http') ? '_blank' : '_self'} 
                         rel={item.linkUrl.startsWith('http') ? 'noopener noreferrer' : ''}
-                        className={`mt-12 md:mt-4 p-4 rounded-lg border border-border bg-card text-center flex flex-col h-full w-full max-w-xs mx-auto ${item.comingSoon || !item.linkUrl ? 'pointer-events-none' : 'cursor-pointer hover:bg-accent'}`}
+                        className={`mt-12 md:mt-4 p-4 rounded-lg border-2 border-border bg-card text-center flex flex-col h-full w-full max-w-xs mx-auto ${item.comingSoon || !item.linkUrl ? 'pointer-events-none' : 'cursor-pointer hover:bg-accent'}`}
                       >
                         {/* Image Placeholder */}
                         <div className="w-full h-32 bg-muted/50 rounded-md mb-4 flex items-center justify-center flex-shrink-0 relative">
