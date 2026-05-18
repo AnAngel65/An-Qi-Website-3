@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { Check } from "lucide-react";
+import { Check, Code, DatabaseZap, Users } from "lucide-react";
 
 const toolCategories = [
   {
     id: "automation_data",
+    icon: DatabaseZap,
     category: "Automation & Data",
     description: "Data management, automation, and enterprise systems",
     tools: [
@@ -16,6 +17,7 @@ const toolCategories = [
   },
   {
     id: "productivity_collaboration",
+    icon: Users,
     category: "Productivity & Collaboration",
     description: "Project management, communication, and documentation",
     tools: [
@@ -27,6 +29,7 @@ const toolCategories = [
   },
   {
     id: "development_design",
+    icon: Code,
     category: "Development & Design",
     description: "Code, design, and AI-powered development",
     tools: [
@@ -48,111 +51,108 @@ interface ToolsPanelProps {
 }
 
 export function ToolsPanel({ onClose }: ToolsPanelProps) {
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState(toolCategories[0].id);
+  const active = toolCategories.find((c) => c.id === activeCategory)!;
+  const ActiveIcon = active.icon;
 
   return (
-    <div className="px-6 py-12 max-w-6xl mx-auto">
-      {/* Header */}
-      <div className="mb-16 max-w-3xl">
-        <span className="text-xs tracking-[0.3em] uppercase text-primary font-medium">
-          Capabilities
-        </span>
-        <h2 className="mt-6 text-4xl md:text-5xl font-extralight leading-tight text-balance">
-          The tools behind
-          <span className="text-primary"> the craft</span>
-        </h2>
-        <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-          Mastery isn&apos;t about the tools themselves—it&apos;s about knowing when and
-          how to wield them in service of the vision.
-        </p>
-      </div>
+    <div className="grid lg:grid-cols-5 gap-12 items-start min-h-[calc(100vh-10rem)] px-6 py-12 max-w-7xl mx-auto">
+      {/* Left Column: Header and Navigation */}
+      <div className="lg:col-span-2 lg:sticky lg:top-24">
+        {/* Header */}
+        <div className="max-w-3xl">
+          <span className="text-xs tracking-[0.3em] uppercase text-primary font-medium">
+            Capabilities
+          </span>
+          <h2 className="mt-6 text-4xl md:text-5xl font-extralight leading-tight text-balance">
+            The tools behind
+            <span className="text-primary"> the craft</span>
+          </h2>
+          <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
+            Mastery isn&apos;t about the tools themselves—it&apos;s about knowing when
+            and how to wield them in service of the vision.
+          </p>
+        </div>
 
-      {/* Categories accordion */}
-      <div className="space-y-4">
-        {toolCategories.map((category) => {
-          const isExpanded = activeCategory === category.id;
-
-          return (
-            <div
-              key={category.id}
-              className={`border rounded-sm overflow-hidden transition-all duration-300 ${
-                isExpanded ? "border-primary bg-muted/5" : "border-border/30"
-              }`}
-            >
-              {/* Category header */}
+        {/* Tab navigation */}
+        <div className="mt-12 space-y-2">
+          {toolCategories.map((category) => {
+            const isActive = activeCategory === category.id;
+            const CategoryIcon = category.icon;
+            return (
               <button
-                onClick={() =>
-                  setActiveCategory(isExpanded ? null : category.id)
-                }
-                className={`w-full flex items-center justify-between p-6 text-left transition-colors duration-300 ${
-                  isExpanded ? "bg-muted/10" : "hover:bg-muted/5"
+                key={category.id}
+                onClick={() => setActiveCategory(category.id)}
+                className={`w-full flex items-start text-left p-4 rounded-md transition-all duration-300 ${
+                  isActive
+                    ? "bg-primary/10 border-primary/30 shadow-sm"
+                    : "hover:bg-muted/50"
                 }`}
               >
+                <CategoryIcon
+                  className={`w-5 h-5 mr-4 mt-1 transition-colors ${
+                    isActive ? "text-primary" : "text-muted-foreground"
+                  }`}
+                />
                 <div>
-                  <h3 className="text-xl font-light text-foreground">
+                  <h3
+                    className={`font-medium transition-colors ${
+                      isActive ? "text-primary" : "text-foreground"
+                    }`}
+                  >
                     {category.category}
                   </h3>
                   <p className="text-sm text-muted-foreground mt-1">
                     {category.description}
                   </p>
                 </div>
-                <div
-                  className={`w-8 h-8 rounded-full border border-border flex items-center justify-center transition-all duration-300 ${
-                    isExpanded ? "bg-primary border-primary rotate-45" : ""
-                  }`}
-                >
-                  <span
-                    className={`text-lg leading-none transition-colors ${
-                      isExpanded ? "text-primary-foreground" : "text-muted-foreground"
-                    }`}
-                  >
-                    +
-                  </span>
-                </div>
               </button>
-
-              {/* Expanded tools list */}
-              <div
-                className={`overflow-hidden transition-all duration-500 ${
-                  isExpanded ? "max-h-96" : "max-h-0"
-                }`}
-              >
-                <div className="px-6 pb-6 pt-2 border-t border-border/20">
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    {category.tools.map((tool, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center justify-between p-4 bg-muted/5 rounded-sm"
-                      >
-                        <div className="flex items-center gap-3">
-                          <Check className="w-4 h-4 text-primary" />
-                          <span className="text-foreground">{tool.name}</span>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <span className="text-xs text-muted-foreground">
-                            {tool.years}y
-                          </span>
-                          <span
-                            className={`px-2 py-0.5 text-xs rounded-sm ${
-                              levelColors[tool.level as keyof typeof levelColors]
-                            }`}
-                          >
-                            {tool.level}
-                          </span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
 
+      {/* Right Column: Active Content Panel */}
+      <div className="lg:col-span-3">
+        <div className="p-8 border rounded-lg bg-muted/30 min-h-[30rem]">
+          <div className="flex items-center gap-4 mb-8">
+            <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+              <ActiveIcon className="w-6 h-6 text-primary" />
+            </div>
+            <div>
+              <h3 className="text-2xl font-light text-foreground">{active.category}</h3>
+              <p className="text-muted-foreground">{active.description}</p>
+            </div>
+          </div>
+          
+          <div className="grid sm:grid-cols-2 gap-4">
+            {active.tools.map((tool, index) => (
+              <div
+                key={index}
+                className="flex items-center justify-between p-4 bg-background/50 rounded-md border border-border/50"
+              >
+                <span className="text-foreground font-medium">{tool.name}</span>
+                <div className="flex items-center gap-3">
+                  <span className="text-xs text-muted-foreground">
+                    {tool.years}y
+                  </span>
+                  <span
+                    className={`px-2 py-0.5 text-xs rounded-sm font-medium ${
+                      levelColors[tool.level as keyof typeof levelColors]
+                    }`}
+                  >
+                    {tool.level}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      
       {/* Note */}
-      <div className="mt-12 p-6 border border-primary/20 rounded-sm bg-primary/5">
-        <p className="text-sm text-muted-foreground leading-relaxed">
+      <div className="lg:col-span-5 mt-8 p-4 border border-primary/20 rounded-sm bg-primary/5">
+        <p className="text-sm text-center text-muted-foreground leading-relaxed">
           <span className="text-foreground font-medium">A note on tools: </span>
           This list represents my primary toolkit, but I&apos;m always exploring new 
           technologies. The best tool is the one that serves the project&apos;s needs.

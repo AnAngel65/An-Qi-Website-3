@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { HeroSection } from "@/components/sections/hero-section";
 import { ExplorationHub } from "@/components/sections/exploration-hub";
 import { ClosingSection } from "@/components/sections/closing-section";
@@ -45,7 +46,13 @@ export default function Home() {
         <HeroSection />
 
         {/* Exploration Hub - interactive navigation */}
-        <ExplorationHub onNavigate={handleNavigate} />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <ExplorationHub onNavigate={handleNavigate} />
+        </motion.div>
 
         {/* Closing - scroll section */}
         <ClosingSection />
