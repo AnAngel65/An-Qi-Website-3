@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, MapPin, Briefcase } from "lucide-react";
+import { useTypingEffect } from "@/hooks/use-typing-effect";
 
 export function HeroSection() {
   const [scrollY, setScrollY] = useState(0);
@@ -33,6 +34,16 @@ export function HeroSection() {
   const opacity = Math.max(0, 1 - scrollY / 600);
   const scale = 1 + scrollY * 0.0003;
   const translateY = scrollY * 0.4;
+
+  const animatedText = useTypingEffect(
+    ["Operations Specialist", "Client Success Concierge", "Project Coordinator"],
+    {
+      speed: 50,
+      eraseSpeed: 25,
+      eraseDelay: 2000,
+      typingDelay: 500,
+    }
+  );
 
   return (
     <section
@@ -87,10 +98,10 @@ export function HeroSection() {
         }}
       >
         {/* Subtle overline */}
-        <div className="mb-8 flex items-center justify-center gap-4">
+        <div className="mb-16 flex items-center justify-center gap-4">
           <span className="h-px w-12 bg-primary/50" />
-          <span className="text-xs tracking-[0.3em] uppercase text-muted-foreground font-medium">
-            Operations Specialist | Client Success Concierge | Project Coordinator
+          <span className="text-base tracking-[0.3em] uppercase text-muted-foreground font-medium h-6">
+            {animatedText}
           </span>
           <span className="h-px w-12 bg-primary/50" />
         </div>
@@ -103,8 +114,8 @@ export function HeroSection() {
         </h1>
 
         {/* Subheading with refined spacing */}
-        <p className="mt-16 text-lg md:text-2xl text-muted-foreground font-light leading-relaxed max-w-2xl mx-auto text-balance">
-          With 8 years of experience in project-driven environments, I provide the operational backbone that allows businesses to scale and leaders to focus. I turn complex coordination into a seamless, reliable experience, managing the structural integrity of your workflow with empathy and precision.
+        <p className="mt-16 text-lg md:text-2xl text-muted-foreground font-light leading-relaxed max-w-3xl mx-auto text-balance">
+          For 8 years, I've been the operational backbone for scaling businesses. I transform complex projects into seamless workflows, empowering leaders to focus on what matters most.
         </p>
 
         {/* Location & Work */}
@@ -115,7 +126,7 @@ export function HeroSection() {
           </div>
           <div className="flex items-center gap-2">
             <Briefcase size={16} />
-            <span>Remote full-time/freelance</span>
+            <span>Remote full-time/ Freelance</span>
           </div>
         </div>
       </div>
