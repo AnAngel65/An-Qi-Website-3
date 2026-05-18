@@ -103,7 +103,7 @@ export function HeroSection() {
         </h1>
 
         {/* Subheading with refined spacing */}
-        <p className="mt-16 text-xl md:text-2xl text-muted-foreground font-light leading-relaxed max-w-2xl mx-auto text-balance">
+        <p className="mt-16 text-lg md:text-2xl text-muted-foreground font-light leading-relaxed max-w-2xl mx-auto text-balance">
           With 8 years of experience in project-driven environments, I provide the operational backbone that allows businesses to scale and leaders to focus. I turn complex coordination into a seamless, reliable experience, managing the structural integrity of your workflow with empathy and precision.
         </p>
 

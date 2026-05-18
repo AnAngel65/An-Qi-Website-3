@@ -65,7 +65,7 @@ const SiteEvolution = () => {
       {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-background/80 backdrop-blur-md flex items-center justify-center z-50 p-4">
-          <div className="bg-card border border-border rounded-lg shadow-xl w-full max-w-7xl text-card-foreground relative">
+          <div className="bg-card border border-border rounded-lg shadow-xl w-full max-w-7xl text-card-foreground relative overflow-y-auto max-h-[90vh]">
             {/* Close Button */}
             <button
               onClick={() => setIsModalOpen(false)}
@@ -86,7 +86,7 @@ const SiteEvolution = () => {
                 {/* The vertical line for mobile */}
                 <div className="block md:hidden absolute top-0 left-1/2 w-0.5 h-full bg-border transform -translate-x-1/2"></div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-4 items-start md:items-stretch">
+                <div className="grid grid-cols-1 md:grid-cols-5 gap-4 md:gap-4 items-start md:items-stretch">
                   {timelineData.map((item, index) => (
                     <div key={index} className="flex flex-col items-center relative z-10">
                       {/* Dot on the timeline */}
