@@ -8,8 +8,8 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Alex Chen | Creative Director & Digital Strategist',
-  description: 'A cinematic journey through craft, vision, and impact. Explore the portfolio of Alex Chen.',
+  title: 'NG AN QI | Operations Specialist',
+  description: 'With 8 years of experience in project-driven environments, I provide the operational backbone that allows businesses to scale and leaders to focus.',
   generator: 'v0.app',
   icons: {
     icon: [
