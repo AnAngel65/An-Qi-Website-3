@@ -8,7 +8,7 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'NG AN QI | Operations Specialist',
+  title: 'Ng An Qi | Operations Specialist',
   description: 'With 8 years of experience in project-driven environments, I provide the operational backbone that allows businesses to scale and leaders to focus.',
   generator: 'v0.app',
   icons: {

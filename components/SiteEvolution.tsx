@@ -36,14 +36,14 @@ const timelineData = [
     active: true,
     comingSoon: false,
     imageUrl: "/images/v4.png",
-    linkUrl: "",
+    linkUrl: "https://an-qi-website-3.vercel.app/",
   },
   {
     title: "The Dream",
     description: "",
     active: false,
     comingSoon: true,
-    imageUrl: "",
+    imageUrl: "/images/pexels-ian-panelo-20737557.jpg",
     linkUrl: "",
   },
 ];
