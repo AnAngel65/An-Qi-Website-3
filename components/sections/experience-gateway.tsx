@@ -10,7 +10,7 @@ const documents = [
     subtitle: "One-Page Summary",
     description: "A concise, powerful summary of my career, tailored for quick reviews. It highlights key achievements, skills, and strategic impact in a single page.",
     icon: FileText,
-    href: "/assets/documents/resume.pdf",
+    href: "/documents/resume.pdf",
     accent: "primary",
   },
   {
@@ -19,7 +19,7 @@ const documents = [
     subtitle: "Comprehensive History",
     description: "A detailed account of my professional journey, including full work experience, academic qualifications, and project timelines.",
     icon: FileText,
-    href: "/assets/documents/2026 CV.pdf",
+    href: "/documents/2026 CV.pdf",
     accent: "muted",
   },
   {
@@ -28,7 +28,7 @@ const documents = [
     subtitle: "Curated Works",
     description: "A visual showcase of my architectural projects, featuring design concepts, project management insights, and final outcomes.",
     icon: Building,
-    href: "/assets/documents/portfolio.pdf",
+    href: "/documents/portfolio.pdf",
     accent: "primary",
   },
 ];
