@@ -1,7 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { FileText, Download, Briefcase, GraduationCap, Building } from "lucide-react";
+import {
+  FileText,
+  Download,
+  Briefcase,
+  GraduationCap,
+  Building,
+  Eye,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { PdfViewer } from "@/components/ui/pdf-viewer";
 
 const documents = [
   {
@@ -53,6 +62,10 @@ const highlights = [
 
 export function ExperienceGateway() {
   const [hoveredDoc, setHoveredDoc] = useState<string | null>(null);
+  const [selectedPdf, setSelectedPdf] = useState<{
+    url: string;
+    title: string;
+  } | null>(null);
 
   return (
     <div className="px-6 py-8 max-w-6xl mx-auto">
@@ -106,11 +119,8 @@ export function ExperienceGateway() {
             const isHovered = hoveredDoc === doc.id;
 
             return (
-              <a
+              <div
                 key={doc.id}
-                href={doc.href}
-                target="_blank"
-                rel="noopener noreferrer"
                 onMouseEnter={() => setHoveredDoc(doc.id)}
                 onMouseLeave={() => setHoveredDoc(null)}
                 className="group relative flex flex-col p-6 border border-border/30 rounded-sm transition-all duration-500 hover:border-primary/30"
@@ -144,15 +154,30 @@ export function ExperienceGateway() {
                 {/* Footer */}
                 <div className="relative mt-6 pt-4 border-t border-border/30 flex items-center justify-between">
                   <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                    <span>PDF</span>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => {
+                        setSelectedPdf({
+                          url: doc.href,
+                          title: doc.title,
+                        });
+                      }}
+                    >
+                      <Eye className="w-4 h-4 mr-2" />
+                      View
+                    </Button>
+                    <Button variant="ghost" size="sm" asChild>
+                      <a
+                        href={doc.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Download className="w-4 h-4 mr-2" />
+                        Download
+                      </a>
+                    </Button>
                   </div>
-                  <Download
-                    className={`w-4 h-4 transition-all duration-300 ${
-                      isHovered
-                        ? "text-primary translate-y-0 opacity-100"
-                        : "text-muted-foreground translate-y-1 opacity-50"
-                    }`}
-                  />
                 </div>
 
                 {/* Bottom accent */}
@@ -161,11 +186,19 @@ export function ExperienceGateway() {
                     isHovered ? "w-full" : "w-0"
                   }`}
                 />
-              </a>
+              </div>
             );
           })}
         </div>
       </div>
+      {selectedPdf && (
+        <PdfViewer
+          isOpen={!!selectedPdf}
+          onClose={() => setSelectedPdf(null)}
+          pdfUrl={selectedPdf.url}
+          title={selectedPdf.title}
+        />
+      )}
     </div>
   );
 }
