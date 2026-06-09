@@ -12,7 +12,7 @@ const timelineData = [
     active: false,
     comingSoon: false,
     imageUrl: "/images/v1.png",
-    linkUrl: "/assets/documents/2026 CV.pdf",
+    linkUrl: "/documents/2026 CV.pdf",
   },
   {
     title: "The Foundation",
